@@ -1,0 +1,28 @@
+{
+  "name": "todo-backbone",
+  "description": "simple todo app in backbone, trying to load dependencies with require js",
+  "main": "app/app.js",
+  "authors": [
+    "dharmendrasingh715@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "http://dev.local",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "^2.3.5",
+    "jquery": "^3.2.1",
+    "underscore": "^1.8.3",
+    "bower": "*",
+    "bootstrap-sass": "^3.3.7",
+    "modernizer": "^2.8.2",
+    "handlebars": "^4.0.11",
+    "backbone": "^1.3.3"
+  }
+}
