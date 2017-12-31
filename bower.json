@@ -1,7 +1,7 @@
 {
   "name": "todo-backbone",
   "description": "simple todo app in backbone, trying to load dependencies with require js",
-  "main": "app/app.js",
+  "main": "app/main.js",
   "authors": [
     "dharmendrasingh715@gmail.com"
   ],

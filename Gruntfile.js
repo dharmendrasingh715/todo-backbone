@@ -57,7 +57,7 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: grunt.option('port') || SERVER_PORT,
-        hostname: 'dev.local'
+        hostname: 'localhost'
       },
       livereload: {
         options: {
@@ -82,8 +82,12 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
-        path: 'http://dev.local:<%= connect.options.port %>'
+        path: 'http://localhost:<%= connect.options.port %>'
       }
+    },
+    clean: {
+      dist: ['.tmp', '<%= dirConfig.dist %>/*'],
+      server: '.tmp'
     },
     jshint: {
       options: {
@@ -128,7 +132,7 @@ module.exports = function (grunt) {
       server: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/styles',
+          cwd: '<%= dirConfig.app %>/styles',
           src: ['*.{scss,sass}'],
           dest: '.tmp/styles',
           ext: '.css'
@@ -138,26 +142,27 @@ module.exports = function (grunt) {
     requirejs: {
       dist: {
         options : {
-			almond: true,
-		  	replaceRequireScript: [{
-			  	files: ['<%= dirConfig.dist %>/index.html'],
-			  	module: 'main'	
-		 	}],
+			    almond: true,
+		  	  replaceRequireScript: [{
+			  	  files: ['<%= dirConfig.dist %>/index.html'],
+			  	  module: 'main'	
+		 	    }],
 
-		  	modules: [{name: 'main'}],
-		  	baseUrl: '<%= dirConfig.app %>/scripts',
+		  	  modules: [{name: 'main'}],
+		  	  baseUrl: '<%= dirConfig.app %>/scripts',
 			
-			mainConfigFile: '<%= dirConfig.app %>/scripts/main.js', 
+			    mainConfigFile: '<%= dirConfig.app %>/scripts/main.js', 
 
-			keepBuildDir: true,
-			dir: '.tmp/scripts',
+			    keepBuildDir: true,
+			    dir: '.tmp/scripts',
 
-			optimize: 'none',
-			useStrict: true,
-			wrap: true
+			    optimize: 'none',
+			    useStrict: true,
+			    wrap: true
+
         }
       }        
-	},
+	  },
     uglify: {
       dist: {
         files: {
@@ -211,29 +216,25 @@ module.exports = function (grunt) {
         }]
       }
     },
-    uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
-      }
-    },
-    
-    qunit: {
-      files: ['test/**/*.html']
-    },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      lib_test: {
-        files: '<%= jshint.lib_test.src %>',
-        tasks: ['jshint:lib_test', 'qunit']
-      }
+    bower: {
+      all: {
+        rjsConfig: '<%= dirConfig.app %>/scripts/main.js'  
+      }  
     }
+  });
+
+  grunt.registerTask('serve', function (target) {
+    if(target === 'dist') {
+      return grunt.task.run(['build','open:server','connect:dist:keepalive']); 
+    }   
+
+    grunt.task.run([
+      'clean:server',
+      'sass:server',
+      'connect:livereload',
+      'open:server',
+      'watch'
+    ]);
   });
 
   // Default task.
