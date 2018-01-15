@@ -28,7 +28,6 @@
   "version": "1.0.0",
   "description": "backbone todo app",
   "main": "app/main.js",
-  "dependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

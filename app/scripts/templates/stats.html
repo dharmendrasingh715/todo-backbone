@@ -1,15 +1,25 @@
-<span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
-<ul id="filters">
-	<li>
-    	<a class="selected" href="#/">All</a>
-  	</li>
-  	<li>
-    	<a href="#/active">Active</a>
-  	</li>
-  	<li>
-    	<a href="#/completed">Completed</a>
-  	</li>
-</ul>
+<div class="col-sm-3">
+	<span id="todo-count">
+		<strong><%= remaining %></strong>
+		<%= remaining === 1 ? 'item' : 'items' %> left
+	</span>	
+</div>	
+<div class="col-sm-6 text-center">
+	<ul id="filters" class="list-inline">
+		<li>
+	    	<a class="selected" href="#/">All</a>
+	  	</li>
+	  	<li>
+	    	<a href="#/active">Active</a>
+	  	</li>
+	  	<li>
+	    	<a href="#/completed">Completed</a>
+	  	</li>
+	</ul>
+</div>
+<div class="col-sm-2">
 <% if (completed) { %>
-<button id="clear-completed">Clear completed (<%= completed %>)</button>
+<button id="clear-completed" class="btn">Clear completed (<%= completed %>)</button>
 <% } %>
+</div>
+<div class="clearfix"></div>

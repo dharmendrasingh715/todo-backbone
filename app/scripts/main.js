@@ -16,7 +16,7 @@ require.config({
 		jquery: '../bower_components/jquery/dist/jquery',
 		underscore: '../bower_components/underscore/underscore',
 		backbone: '../bower_components/backbone/backbone',
-		backboneLocalstorage: '../bower_components/backbone.localStorage/build/backbone.localStorage',
+		backboneLocalstorage: '../bower_components/backbone.localStorage/backbone.localStorage',
 		bootstrap: '../bower_components/bootstrap-sass/assets/javascripts/bootstrap',
 		text: '../bower_components/text/text'
 	}
@@ -25,9 +25,10 @@ require.config({
 
 require([
 	'backbone',
-	'views/app'
-], function (Backbone,AppView) {
-	debugger;
+	'views/app',
+	'routes/router'
+], function (Backbone,AppView,WorkSpace) {
+	new WorkSpace();
 	Backbone.history.start();
 	new AppView();
 })

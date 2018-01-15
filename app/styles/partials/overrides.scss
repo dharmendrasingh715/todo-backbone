@@ -1,0 +1,32 @@
+.no-padding {
+	padding: 0;
+}
+
+.no-padding-horizontal {
+	padding-left:0;
+	padding-right:0;
+}
+
+.no-padding-vertical {
+	padding-top:0;
+	padding-bottom:0;
+}
+
+input[type="checkbox"].styled:checked + label:after,
+input[type="radio"].styled:checked + label:after,
+.checkbox input[type=checkbox]:checked + label:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e013";
+}
+
+input[type="checkbox"].styled:checked label:before,
+input[type="radio"].styled:checked label:before,
+.checkbox label:before {
+    // font-size: 14px;
+}
+
+input[type="checkbox"].styled:checked label:after,
+input[type="radio"].styled:checked label:after,
+.checkbox label:after {
+    // font-size: 14px;
+}

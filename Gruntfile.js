@@ -1,8 +1,11 @@
 'use strict';
-
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 9000;
-var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
+
+var lrSnippet = require('connect-livereload')({ 
+  port: LIVERELOAD_PORT 
+});
+
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 }
@@ -39,7 +42,7 @@ module.exports = function (grunt) {
         livereload: LIVERELOAD_PORT
       },
       sass: {
-        files: ['<%= dirConfig.app %>/style/{,*/}*.{scss,sass}'],
+        files: ['<%= dirConfig.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['sass:server']
       },
       livereload: {
@@ -48,9 +51,9 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= dirConfig.app %>/*.html>',
-          '{.tmp,<%= dirConfig %>}/styles/{,*/}*.css',
-          '{.tmp,<%= dirConfig %>}/scripts/{,*}*.js',
-          '<%= dirConfig %>/scripts/templates/{,*}*.{hbs,ejs,mustache}'
+          '{.tmp,<%= dirConfig.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= dirConfig.app %>}/scripts/{,*/}*.js',
+          '<%= dirConfig.app %>/scripts/templates/{,*/}*.{hbs,ejs,mustache}'
         ]
       },
     },

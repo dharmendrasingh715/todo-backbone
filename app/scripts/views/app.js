@@ -25,6 +25,7 @@ define([
 
 		initialize: function () {
 			this.allCheckbox = this.$('#toggle-all')[0];
+			this.allCheckDiv = this.$('#toggle-all-check');
 			this.$input = this.$('#new-todo');
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
@@ -35,7 +36,6 @@ define([
 			this.listenTo(Todos, 'change:completed', this.filterOne);
 			this.listenTo(Todos, 'filter', this.filterAll);
 			this.listenTo(Todos, 'all', this.render);
-
 			Todos.fetch();
 		},
 
@@ -46,6 +46,7 @@ define([
 			if (Todos.length) {
 				this.$main.show();
 				this.$footer.show();
+				this.allCheckDiv.show();
 
 				this.$footer.html(this.template({
 					completed: completed,
@@ -54,11 +55,12 @@ define([
 
 				this.$('#filters li a')
 				.removeClass('selected')
-				.filter('[href=#/]' + (Common.TodoFilter || '') +'"]' )
+				.filter('[href="#/' + (Common.TodoFilter || '') +'"]' )
 				.addClass('selected');
 			} else {
 				this.$main.hide();
 				this.$footer.hide();
+				this.allCheckDiv.hide();
 			}
 
 			this.allCheckbox.checked = !remaining;
@@ -95,7 +97,6 @@ define([
 			if(event.which !== Common.ENTER_KEY || !this.$input.val().trim()) {
 				return;
 			}
-			debugger;
 
 			Todos.create( this.newAttributes());
 			this.$input.val('');
