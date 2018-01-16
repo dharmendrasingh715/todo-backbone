@@ -219,6 +219,20 @@ module.exports = function (grunt) {
         }]
       }
     },
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= dirConfig.app %>',
+          dist: '<%= dirConfig.dist %>',
+          src: [
+            'styles/fonts/{,*/}*.*',
+            'bower_components/bootstrap-sass/assets/fonts/bootstrap/*.*'
+          ]      
+        }]
+      }
+    },
     bower: {
       all: {
         rjsConfig: '<%= dirConfig.app %>/scripts/main.js'  
@@ -239,6 +253,19 @@ module.exports = function (grunt) {
       'watch'
     ]);
   });
+
+  grunt.registerTask('build',[
+    'clean:dist',
+    'sass:dist',
+    'useminPrepare',
+    'htmlmin',
+    'concat',
+    'cssmin',
+    'requirejs',
+    'uglify',
+    'copy',
+    'usemin'      
+  ]);
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
